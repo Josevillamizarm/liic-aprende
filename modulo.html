@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script>
+        (function () {
+            var tema = localStorage.getItem('liic-tema') || 'light';
+            document.documentElement.setAttribute('data-theme', tema);
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pavimentos | LIIC Aprende</title>
+    <meta name="description" content="Guías, videos, errores frecuentes, normas técnicas y autoevaluaciones de la asignatura Pavimentos del Laboratorio Integrado de Ingeniería Civil.">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Open Graph / redes sociales -->
+    <meta property="og:title" content="Pavimentos | LIIC Aprende">
+    <meta property="og:description" content="Consulta las guías, videos, errores frecuentes y normas técnicas de cada ensayo antes de asistir a tu práctica.">
+    <meta property="og:image" content="assets/logo-unimagdalena.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+        <h2>LIIC Aprende</h2>
+    </div>
+
+    <!--==========================
+    MODAL
+    ===========================-->
+    <div class="modal" id="modal">
+        <div class="modalContenido">
+            <span class="cerrar" id="cerrarModal">&times;</span>
+            <h2 id="modalTitulo">Próximamente</h2>
+            <p id="modalTexto">Este contenido aún se encuentra en desarrollo.</p>
+            <button id="btnCerrar">Entendido</button>
+        </div>
+    </div>
+
+    <button id="btnTop" aria-label="Volver arriba">↑</button>
+
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/logo-unimagdalena.png" alt="Logo Universidad">
+            <div>
+                <h2>LIIC Aprende</h2>
+                <span>Universidad del Magdalena</span>
+            </div>
+        </div>
+
+        <nav id="navMenu">
+            <a href="index.html#inicio">Inicio</a>
+            <a href="index.html#liic">LIIC</a>
+            <a href="index.html#areas">Áreas</a>
+            <a href="index.html#materias">Asignaturas</a>
+            <a href="index.html#contacto">Contacto</a>
+        </nav>
+
+        <div class="navAcciones">
+            <button class="btnTema" id="btnTema" aria-label="Cambiar a modo oscuro">🌙</button>
+            <button class="btnMenu" id="btnMenu" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <section class="moduloHero">
+        <div class="breadcrumb">
+            <a href="index.html">Inicio</a> / <a href="index.html#materias">Asignaturas</a> / Pavimentos
+        </div>
+        <h1>🛣️ Pavimentos</h1>
+        <p>
+            Consulta la ficha técnica, la guía paso a paso, los errores frecuentes, la interpretación de resultados
+            y la autoevaluación de cada ensayo antes de asistir a tu práctica en el laboratorio.
+        </p>
+    </section>
+
+    <!--=========================================
+    PRÁCTICAS DE LA ASIGNATURA
+    ==========================================-->
+    <section class="materias" id="practicas">
+        <div class="titulo">
+            <h2>Prácticas de Pavimentos</h2>
+            <p>La asignatura se compone de 3 prácticas de laboratorio. Según la consulta realizada al docente, la Fase I de LIIC Aprende se enfoca en la práctica con mayor dificultad de aprendizaje.</p>
+        </div>
+
+        <div class="gridMaterias">
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>Práctica 1 — Materiales Bituminosos</h3>
+                <p>Penetración, punto de ablandamiento, ductilidad, viscosidad y demás ensayos sobre asfaltos y cementos asfálticos.</p>
+            </div>
+
+            <div class="materia activa">
+                <div class="estado disponible">Disponible</div>
+                <h3>Práctica 2 — Mezclas Asfálticas</h3>
+                <p>Diseño Marshall, gravedad específica y espesor de mezclas asfálticas compactadas.</p>
+            </div>
+
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>Práctica 3 — Suelos y Estructuras</h3>
+                <p>CBR, densidad de campo, penetración dinámica de cono, módulo de rotura y resistencia de adoquines.</p>
+            </div>
+        </div>
+    </section>
+
+    <!--=========================================
+    BUSCADOR + PROGRESO
+    ==========================================-->
+    <div class="herramientasModulo">
+        <div class="buscadorWrap">
+            <input type="text" id="buscadorEnsayos" placeholder="🔍 Buscar ensayo por nombre o norma...">
+        </div>
+        <div class="progresoWrap">
+            <div class="progresoInfo" id="progresoTexto">0 de 2 ensayos completados (0%)</div>
+            <div class="progresoBarraFondo">
+                <div class="progresoBarra" id="barraProgreso"></div>
+            </div>
+        </div>
+    </div>
+
+    <section class="ensayos">
+
+        <div class="sinResultados" id="sinResultados">
+            😕 No se encontraron ensayos que coincidan con tu búsqueda.
+        </div>
+
+        <div class="tituloEnsayos">
+            <h3>Ensayos de la Práctica 2 — Mezclas Asfálticas</h3>
+            <p>El docente identificó estos 2 ensayos como los de mayor dificultad para los estudiantes. Los demás ensayos de esta práctica se incorporarán en próximas versiones.</p>
+        </div>
+
+        <!-- ============ ENSAYO CRÍTICO 1 ============ -->
+        <details class="ensayoCard" data-id="marshall-elaboracion" open>
+            <summary>
+                Diseño Marshall — Mezclado y Elaboración de Probetas
+                <span class="norma">INV E-748-13</span>
+                <span class="flecha">⌄</span>
+            </summary>
+            <div class="ensayoCuerpo">
+
+                <div class="cardHerramientas">
+                    <label class="checkCompletadoWrap">
+                        <input type="checkbox" class="checkCompletado">
+                        Marcar como completado
+                    </label>
+                    <button type="button" class="btnImprimir">🖨️ Imprimir / PDF</button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tabBtn activo" data-tab="ficha">🧾 Ficha técnica</button>
+                    <button class="tabBtn" data-tab="guia">📄 Guía paso a paso</button>
+                    <button class="tabBtn" data-tab="video">🎥 Video</button>
+                    <button class="tabBtn" data-tab="errores">⚠️ Errores frecuentes</button>
+                    <button class="tabBtn" data-tab="interpretacion">📊 Interpretación</button>
+                    <button class="tabBtn" data-tab="normas">📚 Normas</button>
+                    <button class="tabBtn" data-tab="autoeval">📝 Autoevaluación</button>
+                </div>
+
+                <!-- FICHA TÉCNICA -->
+                <div class="tabPanel activo" data-panel="ficha">
+                    <h4>Objetivo</h4>
+                    <p>Elaborar probetas cilíndricas de mezcla asfáltica en caliente, de aproximadamente 1200 g, que luego se ensayan para determinar su densidad, vacíos, estabilidad y flujo, con el fin de seleccionar el contenido óptimo de asfalto de la mezcla.</p>
+
+                    <div class="fichaGrid">
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Norma</span>
+                            <strong>INV E-748-13</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Probetas</span>
+                            <strong>3 por contenido de asfalto (mínimo 18)</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Contenidos de asfalto</span>
+                            <strong>6, en incrementos de 0,5 %</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Masa por probeta</span>
+                            <strong>≈ 1200 g</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Golpes por cara</span>
+                            <strong>50 o 75, según el tránsito</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Altura esperada</span>
+                            <strong>63,5 ± 1,3 mm</strong>
+                        </div>
+                    </div>
+
+                    <h4>Equipos</h4>
+                    <ul>
+                        <li>Moldes de compactación de 101,6 mm (4") de diámetro, con placa de base y collar de extensión.</li>
+                        <li>Martillo de compactación Marshall y pedestal de compactación con aro de sujeción.</li>
+                        <li>Extractor de probetas.</li>
+                        <li>Horno y placa o estufa calentadora.</li>
+                        <li>Mezcladora mecánica o recipiente de mezcla.</li>
+                        <li>Balanza con sensibilidad de 0,1 g y termómetros.</li>
+                        <li>Espátula, papel filtro, crayola y guantes térmicos.</li>
+                    </ul>
+
+                    <h4>Materiales</h4>
+                    <ul>
+                        <li>Agregados pétreos secos, separados por fracciones según la granulometría de diseño.</li>
+                        <li>Cemento asfáltico (en el LIIC se usa habitualmente asfalto 60-70).</li>
+                    </ul>
+
+                    <div class="nota notaAlerta">
+                        <strong>Seguridad:</strong> se trabaja con material y equipos a más de 140 °C. Usa siempre guantes térmicos, bata y calzado cerrado, y no toques los moldes ni el martillo sin protección.
+                    </div>
+                </div>
+
+                <!-- GUÍA PASO A PASO -->
+                <div class="tabPanel" data-panel="guia">
+                    <h4>1. Antes de la práctica</h4>
+                    <ol class="pasos">
+                        <li>Secar los agregados a 110 °C, separarlos por fracciones y pesar la masa de cada tamiz necesaria para una probeta de ≈ 1200 g, según la hoja de cálculo de diseño Marshall del LIIC.</li>
+                        <li>Calcular la masa de asfalto para cada uno de los 6 contenidos. Normalmente se inicia en 4,5 % o 5,0 % y se aumenta de 0,5 % en 0,5 %.</li>
+                        <li>Calentar el asfalto a la temperatura de mezcla definida por su curva de viscosidad; para asfaltos 60-70 suele estar alrededor de 145 °C.</li>
+                        <li>Calentar los agregados en el horno a una temperatura mayor que la del asfalto, <b>sin superarla en más de 28 °C</b>.</li>
+                    </ol>
+
+                    <h4>2. Preparación de moldes y martillo</h4>
+                    <ol class="pasos" start="5">
+                        <li>Limpiar completamente el molde, el collar, la placa de base y la cara del martillo.</li>
+                        <li>Calentarlos en la placa o estufa a una temperatura entre 90 °C y 150 °C.</li>
+                        <li>Armar el molde y colocar un papel filtro en el fondo.</li>
+                    </ol>
+
+                    <h4>3. Mezclado</h4>
+                    <ol class="pasos" start="8">
+                        <li>Formar un cráter en los agregados calientes y agregar la masa de asfalto calculada.</li>
+                        <li>Mezclar rápidamente hasta que todo el agregado quede recubierto de forma homogénea: <b>máximo 60 s</b> para una probeta o 120 s para una bachada.</li>
+                    </ol>
+
+                    <h4>4. Llenado del molde</h4>
+                    <ol class="pasos" start="10">
+                        <li>Verter toda la mezcla en el molde de una sola vez.</li>
+                        <li>Con la espátula caliente, dar <b>15 golpes alrededor del perímetro y 10 en el interior</b>, y nivelar la superficie.</li>
+                        <li>Colocar un segundo papel filtro sobre la mezcla.</li>
+                        <li>Verificar que la mezcla esté a la temperatura de compactación. Si se enfrió por debajo del rango, se descarta: <b>no se permite recalentarla</b>.</li>
+                    </ol>
+
+                    <h4>5. Compactación</h4>
+                    <ol class="pasos" start="14">
+                        <li>Sujetar el molde con el aro en el pedestal y apoyar la zapata del martillo sobre la mezcla.</li>
+                        <li>Aplicar <b>50 o 75 golpes</b>, según la categoría de tránsito especificada, dejando caer el martillo libremente y <b>manteniendo el vástago siempre vertical</b>.</li>
+                        <li>Retirar el molde, invertirlo (intercambiando la placa de base y el collar) y aplicar el mismo número de golpes a la otra cara.</li>
+                    </ol>
+
+                    <h4>6. Extracción y curado</h4>
+                    <ol class="pasos" start="17">
+                        <li>Retirar la base y el collar y dejar enfriar la probeta dentro del molde hasta una temperatura a la que no se deforme al extraerla (con asfaltos de Barrancabermeja, usualmente cerca de 105 °C).</li>
+                        <li>Extraer la probeta con el extractor, sin golpearla.</li>
+                        <li>Identificarla con crayola (contenido de asfalto y número de probeta) y dejarla sobre una superficie plana y lisa durante una noche.</li>
+                        <li>Al día siguiente, medir el espesor (INV E-744) y pesarla. Si la altura sale de 63,5 ± 1,3 mm, ajustar la masa de las siguientes probetas.</li>
+                    </ol>
+
+                    <div class="formula">
+                        Masa ajustada = 63,5 × masa utilizada ÷ altura obtenida (mm)
+                    </div>
+
+                    <div class="nota">
+                        <strong>Consejo:</strong> trabaja rápido entre el mezclado y la compactación. La mayoría de los problemas de esta práctica vienen de que la mezcla se enfría antes de compactarla.
+                    </div>
+                </div>
+
+                <!-- VIDEO -->
+                <div class="tabPanel" data-panel="video">
+                    <div class="videoWrap">
+                        <iframe src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0"
+                            title="Práctica 2: Diseño de mezclas de concreto asfáltico en caliente"
+                            allow="fullscreen; picture-in-picture; clipboard-write"
+                            loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="videoCredito">Video de la Práctica 2 completa (37 min). En él se muestra la elaboración de las probetas Marshall. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
+                </div>
+
+                <!-- ERRORES FRECUENTES -->
+                <div class="tabPanel" data-panel="errores">
+                    <h4>Errores más comunes y cómo evitarlos</h4>
+                    <div class="errorItem">
+                        <strong>Pesar mal las fracciones o el asfalto.</strong>
+                        <p>Altera la granulometría y el contenido real de asfalto. Pesa cada fracción por separado y verifica la tara de la balanza.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Temperaturas fuera de rango.</strong>
+                        <p>Un agregado más de 28 °C por encima del asfalto lo envejece; una mezcla fría no se compacta bien. Controla la temperatura con termómetro en cada etapa.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Mezclar demasiado tiempo.</strong>
+                        <p>La mezcla pierde temperatura y el asfalto se oxida. No superes 60 s por probeta.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>No calentar el molde ni el martillo.</strong>
+                        <p>La mezcla se enfría en contacto con el metal y los bordes de la probeta quedan mal compactados.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Recalentar la mezcla enfriada.</strong>
+                        <p>Cambia las propiedades del asfalto. Si la mezcla bajó del rango de compactación, debe descartarse.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Chuzado irregular.</strong>
+                        <p>No respetar los 15 golpes perimetrales y 10 centrales deja la mezcla segregada y la densidad no es uniforme.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Martillo inclinado o golpes incompletos.</strong>
+                        <p>El vástago debe estar vertical y la caída debe ser libre. Cuenta los golpes en voz alta y no olvides compactar la segunda cara.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Extraer la probeta muy caliente.</strong>
+                        <p>La probeta se deforma o se fractura. Espera a que se enfríe lo suficiente antes de usar el extractor.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Olvidar el papel filtro o la identificación.</strong>
+                        <p>Sin papel filtro la mezcla se pega al molde; sin marcar la probeta se confunden los contenidos de asfalto.</p>
+                    </div>
+                </div>
+
+                <!-- INTERPRETACIÓN -->
+                <div class="tabPanel" data-panel="interpretacion">
+                    <h4>¿Qué se hace con las probetas?</h4>
+                    <p>Con las probetas se determinan, para cada contenido de asfalto, la gravedad específica bulk (INV E-733), la estabilidad y el flujo (INV E-748) y, junto con la gravedad específica máxima (INV E-735), los parámetros volumétricos (INV E-799).</p>
+
+                    <table class="tablaFicha">
+                        <thead>
+                            <tr><th>Parámetro</th><th>Tendencia al aumentar el asfalto</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Vacíos con aire (Va)</td><td>Disminuyen</td></tr>
+                            <tr><td>Vacíos en el agregado mineral (VAM)</td><td>Bajan hasta un mínimo y luego aumentan</td></tr>
+                            <tr><td>Vacíos llenos de asfalto (VFA)</td><td>Aumentan</td></tr>
+                            <tr><td>Densidad bulk</td><td>Aumenta hasta un máximo y luego disminuye</td></tr>
+                            <tr><td>Estabilidad</td><td>Aumenta hasta un máximo y luego disminuye</td></tr>
+                            <tr><td>Flujo</td><td>Aumenta</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Selección del contenido óptimo</h4>
+                    <ol class="pasos">
+                        <li>Graficar cada parámetro contra el contenido de asfalto.</li>
+                        <li>En la gráfica de vacíos con aire, tomar el contenido de asfalto que corresponde al centro del rango especificado (Artículo 450 de INVIAS, según el tipo de capa y el tránsito).</li>
+                        <li>Con ese contenido, leer los demás parámetros en las gráficas y verificar que todos cumplan la especificación.</li>
+                    </ol>
+
+                    <div class="nota">
+                        <strong>Señal de alerta:</strong> si los resultados de las 3 probetas de un mismo contenido difieren mucho entre sí, es probable que haya habido errores de temperatura, de compactación o de pesaje durante su elaboración.
+                    </div>
+                </div>
+
+                <!-- NORMAS -->
+                <div class="tabPanel" data-panel="normas">
+                    <h4>Normas y documentos de referencia</h4>
+                    <ul>
+                        <li>INV E-748-13 – Estabilidad y flujo de mezclas asfálticas en caliente empleando el equipo Marshall (incluye la elaboración de las probetas).</li>
+                        <li>INV E-744-13 – Espesor o altura de especímenes compactados de mezclas asfálticas.</li>
+                        <li>INV E-733-13 – Gravedad específica bulk y densidad de mezclas asfálticas compactadas.</li>
+                        <li>INV E-799-13 – Análisis volumétrico de mezclas asfálticas compactadas en caliente.</li>
+                        <li>INVIAS (2013). Especificaciones generales de construcción de carreteras, Artículo 450 – Mezclas asfálticas en caliente de gradación continua.</li>
+                        <li>Asphalt Institute. MS-2: Mix Design Methods for Asphalt Concrete, capítulo 5 – Método Marshall.</li>
+                        <li>LIIC. Instructivo de diseño de mezclas asfálticas densas en caliente por el método Marshall (Espinosa, 2016).</li>
+                    </ul>
+                </div>
+
+                <!-- AUTOEVALUACIÓN -->
+                <div class="tabPanel" data-panel="autoeval">
+                    <div class="autoevalBox" data-quiz="marshall-elaboracion"><p>⚠️ Si ves este mensaje, el archivo <b>js/app.js</b> no está actualizado. Reemplázalo y recarga con Ctrl + F5.</p></div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ ENSAYO CRÍTICO 2 ============ -->
+        <details class="ensayoCard" data-id="gravedad-especifica-maxima">
+            <summary>
+                Gravedad Específica Máxima de Mezclas Asfálticas
+                <span class="norma">INV E-735-13</span>
+                <span class="flecha">⌄</span>
+            </summary>
+            <div class="ensayoCuerpo">
+
+                <div class="cardHerramientas">
+                    <label class="checkCompletadoWrap">
+                        <input type="checkbox" class="checkCompletado">
+                        Marcar como completado
+                    </label>
+                    <button type="button" class="btnImprimir">🖨️ Imprimir / PDF</button>
+                </div>
+
+                <div class="tabs">
+                    <button class="tabBtn activo" data-tab="ficha">🧾 Ficha técnica</button>
+                    <button class="tabBtn" data-tab="guia">📄 Guía paso a paso</button>
+                    <button class="tabBtn" data-tab="video">🎥 Video</button>
+                    <button class="tabBtn" data-tab="errores">⚠️ Errores frecuentes</button>
+                    <button class="tabBtn" data-tab="interpretacion">📊 Interpretación</button>
+                    <button class="tabBtn" data-tab="normas">📚 Normas</button>
+                    <button class="tabBtn" data-tab="autoeval">📝 Autoevaluación</button>
+                </div>
+
+                <!-- FICHA TÉCNICA -->
+                <div class="tabPanel activo" data-panel="ficha">
+                    <h4>Objetivo</h4>
+                    <p>Determinar la gravedad específica máxima teórica (G<sub>mm</sub>) de una mezcla asfáltica suelta, es decir, la de la mezcla sin vacíos de aire. Este valor es indispensable para calcular los vacíos con aire de las probetas y el asfalto absorbido por el agregado.</p>
+
+                    <div class="fichaGrid">
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Norma</span>
+                            <strong>INV E-735-13</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Muestra</span>
+                            <strong>Mezcla suelta, sin compactar</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Presión residual</span>
+                            <strong>3,7 ± 0,3 kPa (27,5 ± 2,5 mm Hg)</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Vacío y agitación</span>
+                            <strong>15 ± 2 min</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Temperatura del agua</span>
+                            <strong>25 °C</strong>
+                        </div>
+                        <div class="fichaItem">
+                            <span class="fichaEtiqueta">Inmersión antes de pesar</span>
+                            <strong>10 min</strong>
+                        </div>
+                    </div>
+
+                    <h4>Equipos</h4>
+                    <ul>
+                        <li>Picnómetro de vacío.</li>
+                        <li>Balanza con sensibilidad de 0,1 g y dispositivo de suspensión para pesar en agua.</li>
+                        <li>Bomba de vacío capaz de llegar a 4,0 kPa o menos, con trampa de agua y manómetro de presión residual.</li>
+                        <li>Válvula de purga.</li>
+                        <li>Mesa vibratoria o dispositivo de agitación mecánica.</li>
+                        <li>Baño de agua a 25 °C, termómetro y horno.</li>
+                    </ul>
+
+                    <h4>Masa mínima de muestra</h4>
+                    <table class="tablaFicha">
+                        <thead>
+                            <tr><th>Tamaño máximo del agregado</th><th>Masa mínima (g)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1"</td><td>2500</td></tr>
+                            <tr><td>3/4"</td><td>2000</td></tr>
+                            <tr><td>1/2"</td><td>1500</td></tr>
+                            <tr><td>3/8"</td><td>1000</td></tr>
+                            <tr><td>N.° 4</td><td>500</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- GUÍA PASO A PASO -->
+                <div class="tabPanel" data-panel="guia">
+                    <h4>1. Preparación de la muestra</h4>
+                    <ol class="pasos">
+                        <li>Mientras la mezcla aún está tibia, separar a mano las partículas hasta que los grumos de la fracción fina no superen 6,3 mm (1/4"), <b>sin partir el agregado</b>.</li>
+                        <li>Dejar enfriar la muestra a temperatura ambiente.</li>
+                    </ol>
+
+                    <h4>2. Pesaje</h4>
+                    <ol class="pasos" start="3">
+                        <li>Calibrar el picnómetro: determinar su masa sumergida en agua a la temperatura de ensayo y registrarla como <b>B</b>.</li>
+                        <li>Colocar la muestra en el picnómetro previamente tarado y registrar la masa seca de la muestra como <b>A</b>.</li>
+                    </ol>
+
+                    <h4>3. Remoción del aire</h4>
+                    <ol class="pasos" start="5">
+                        <li>Agregar agua a 25 °C hasta cubrir completamente la muestra (aproximadamente 2 cm por encima).</li>
+                        <li>Tapar el picnómetro, colocarlo sobre la mesa vibratoria y conectar la bomba de vacío.</li>
+                        <li>Encender la agitación y aplicar el vacío gradualmente, abriendo la válvula con suavidad, hasta que el manómetro marque <b>27,5 ± 2,5 mm Hg</b> de presión residual. Este valor debe alcanzarse en un máximo de 2 minutos.</li>
+                        <li>Mantener el vacío y la agitación durante <b>15 ± 2 minutos</b>.</li>
+                        <li>Liberar el vacío <b>lentamente</b> con la válvula de purga para no arrastrar partículas finas.</li>
+                    </ol>
+
+                    <h4>4. Pesaje en agua</h4>
+                    <ol class="pasos" start="10">
+                        <li>Retirar la tapa y sumergir el picnómetro con su contenido en el baño de agua a 25 °C.</li>
+                        <li>Esperar <b>10 minutos</b> de inmersión y a que el agua esté completamente quieta.</li>
+                        <li>Registrar la masa sumergida del picnómetro con la muestra como <b>C</b> y anotar la temperatura del baño.</li>
+                    </ol>
+
+                    <h4>5. Cálculo</h4>
+                    <div class="formula">
+                        G<sub>mm</sub> = A ÷ (A + B − C)
+                    </div>
+                    <p class="leyenda">A = masa seca de la muestra · B = masa del picnómetro sumergido · C = masa del picnómetro con la muestra, sumergido.</p>
+
+                    <div class="nota">
+                        <strong>Consejo:</strong> golpea suavemente el picnómetro durante la agitación para ayudar a liberar las burbujas que quedan adheridas a las partículas.
+                    </div>
+                </div>
+
+                <!-- VIDEO -->
+                <div class="tabPanel" data-panel="video">
+                    <div class="videoWrap">
+                        <iframe src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0"
+                            title="Práctica 2: Diseño de mezclas de concreto asfáltico en caliente"
+                            allow="fullscreen; picture-in-picture; clipboard-write"
+                            loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <p class="videoCredito">Video de la Práctica 2 completa (37 min). En él se muestra la determinación de la gravedad específica máxima. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
+                </div>
+
+                <!-- ERRORES FRECUENTES -->
+                <div class="tabPanel" data-panel="errores">
+                    <h4>Errores más comunes y cómo evitarlos</h4>
+                    <div class="errorItem">
+                        <strong>Dejar grumos sin separar.</strong>
+                        <p>El aire queda atrapado dentro de los grumos y la G<sub>mm</sub> resulta menor. Separa la mezcla mientras está tibia.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Partir el agregado al desmenuzar.</strong>
+                        <p>Expone superficies que no están cubiertas de asfalto y altera el resultado. Separa las partículas, no las rompas.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>No eliminar todo el aire.</strong>
+                        <p>Las burbujas que quedan aumentan el volumen aparente. Verifica que el manómetro llegue a 27,5 ± 2,5 mm Hg y que la agitación funcione todo el tiempo.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>No respetar el tiempo de vacío.</strong>
+                        <p>Menos de 13 minutos puede dejar aire atrapado. Controla los 15 ± 2 minutos con cronómetro.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Liberar el vacío de golpe.</strong>
+                        <p>El cambio brusco de presión arrastra partículas finas fuera del picnómetro. Abre la válvula de purga lentamente.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Agua a una temperatura distinta de 25 °C.</strong>
+                        <p>Cambia la densidad del agua y afecta las masas en agua. Verifica el baño con termómetro.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Leer la balanza con el agua en movimiento.</strong>
+                        <p>La turbulencia hace variar la lectura. Espera los 10 minutos de inmersión y a que el agua esté quieta, y verifica que el picnómetro no toque las paredes del baño.</p>
+                    </div>
+                    <div class="errorItem">
+                        <strong>Usar menos muestra que la mínima.</strong>
+                        <p>Aumenta el error relativo del ensayo. Revisa la tabla de masa mínima según el tamaño máximo del agregado.</p>
+                    </div>
+                </div>
+
+                <!-- INTERPRETACIÓN -->
+                <div class="tabPanel" data-panel="interpretacion">
+                    <h4>¿Para qué sirve la G<sub>mm</sub>?</h4>
+                    <p>La gravedad específica máxima se compara con la gravedad específica bulk de las probetas compactadas (G<sub>mb</sub>) para calcular los vacíos con aire de la mezcla:</p>
+                    <div class="formula">
+                        Va (%) = 100 × (G<sub>mm</sub> − G<sub>mb</sub>) ÷ G<sub>mm</sub>
+                    </div>
+                    <p>También permite calcular la gravedad específica efectiva del agregado (G<sub>se</sub>) y el porcentaje de asfalto absorbido (P<sub>ba</sub>), según la norma INV E-799.</p>
+
+                    <h4>Cómo saber si el resultado es coherente</h4>
+                    <ul>
+                        <li>La G<sub>mm</sub> <b>disminuye</b> a medida que aumenta el contenido de asfalto, porque el asfalto es menos denso que el agregado.</li>
+                        <li>La G<sub>mm</sub> siempre debe ser <b>mayor</b> que la G<sub>mb</sub> de las probetas del mismo contenido de asfalto. Si no lo es, hay un error en alguno de los dos ensayos.</li>
+                        <li>La G<sub>se</sub> calculada con cada contenido de asfalto debería ser prácticamente constante. Si varía mucho, revisa el ensayo.</li>
+                    </ul>
+
+                    <div class="nota notaAlerta">
+                        <strong>Importante:</strong> un error pequeño en el pesaje se amplifica en el cálculo de vacíos. Por eso las masas deben registrarse con aproximación a 0,1 g.
+                    </div>
+                </div>
+
+                <!-- NORMAS -->
+                <div class="tabPanel" data-panel="normas">
+                    <h4>Normas y documentos de referencia</h4>
+                    <ul>
+                        <li>INV E-735-13 – Gravedad específica máxima teórica (G<sub>mm</sub>) y densidad de mezclas asfálticas para pavimentos.</li>
+                        <li>INV E-799-13 – Análisis volumétrico de mezclas asfálticas compactadas en caliente.</li>
+                        <li>Asphalt Institute. MS-2: Mix Design Methods for Asphalt Concrete, capítulo 5 – Método Marshall.</li>
+                        <li>LIIC. Instructivo de diseño de mezclas asfálticas densas en caliente por el método Marshall (Espinosa, 2016).</li>
+                    </ul>
+                </div>
+
+                <!-- AUTOEVALUACIÓN -->
+                <div class="tabPanel" data-panel="autoeval">
+                    <div class="autoevalBox" data-quiz="gravedad-especifica-maxima"><p>⚠️ Si ves este mensaje, el archivo <b>js/app.js</b> no está actualizado. Reemplázalo y recarga con Ctrl + F5.</p></div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ ENSAYOS NO PRIORIZADOS (BLOQUEADOS) ============ -->
+        <div class="ensayoCard bloqueada">
+            <div class="ensayoBloqueadoHeader">
+                <span>🔒 Diseño Marshall — Estabilidad y Flujo de Probetas</span>
+                <span class="norma">INV E-748-13</span>
+            </div>
+        </div>
+
+        <div class="ensayoCard bloqueada">
+            <div class="ensayoBloqueadoHeader">
+                <span>🔒 Gravedad Específica Bulk de Mezclas Compactadas</span>
+                <span class="norma">INV E-733-13</span>
+            </div>
+        </div>
+
+        <div class="ensayoCard bloqueada">
+            <div class="ensayoBloqueadoHeader">
+                <span>🔒 Espesor de Especímenes Compactados</span>
+                <span class="norma">INV E-744-13</span>
+            </div>
+        </div>
+
+    </section>
+
+    <footer id="contacto">
+        <div class="footerGrid">
+            <div>
+                <h3>LIIC Aprende</h3>
+                <p>Ecosistema Digital para el Fortalecimiento del Aprendizaje Práctico del Laboratorio Integrado de Ingeniería Civil.</p>
+            </div>
+            <div>
+                <h3>Ubicación</h3>
+                <p>Hangar C<br>Universidad del Magdalena<br>Santa Marta - Colombia</p>
+            </div>
+            <div>
+                <h3>Desarrollado por</h3>
+                <p>Jose Villamizar Monterroza</p>
+                <p>Práctica profesional 2026 II</p>
+                <a href="https://wa.me/573014654649" target="_blank" rel="noopener" class="whatsapp">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.36.687 4.56 1.872 6.41L4 29l7.77-1.84A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.63 28 15S22.63 3 16.004 3Zm0 21.8a9.76 9.76 0 0 1-4.98-1.36l-.357-.21-4.61 1.09 1.11-4.49-.234-.37A9.77 9.77 0 0 1 5.2 15c0-5.96 4.85-10.8 10.804-10.8S26.8 9.04 26.8 15 21.958 24.8 16.004 24.8Zm5.36-7.34c-.294-.147-1.74-.86-2.01-.958-.27-.099-.467-.147-.663.147-.196.294-.76.958-.932 1.155-.171.196-.343.221-.637.074-.294-.147-1.24-.457-2.362-1.457-.873-.778-1.463-1.74-1.634-2.034-.171-.294-.018-.453.129-.6.132-.132.294-.343.441-.515.147-.171.196-.294.294-.49.098-.196.049-.368-.025-.515-.074-.147-.663-1.598-.909-2.19-.239-.573-.482-.495-.663-.504l-.564-.01c-.196 0-.515.074-.784.368-.27.294-1.03 1.007-1.03 2.457 0 1.45 1.055 2.85 1.202 3.047.147.196 2.076 3.17 5.03 4.444.703.304 1.252.485 1.68.62.706.225 1.348.193 1.856.117.566-.085 1.74-.712 1.985-1.4.245-.688.245-1.278.172-1.4-.074-.123-.27-.196-.564-.343Z"/>
+                    </svg>
+                    301 465 4649
+                </a>
+            </div>
+            <div>
+                <h3>Programa</h3>
+                <p>Ingeniería Civil</p>
+                <p>Universidad del Magdalena</p>
+            </div>
+        </div>
+
+        <div class="copy">© 2026 LIIC Aprende | Universidad del Magdalena</div>
+    </footer>
+
+    <script src="js/app.js?v=4"></script>
+</body>
+
+</html>

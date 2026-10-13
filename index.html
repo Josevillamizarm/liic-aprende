@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script>
+        (function () {
+            var tema = localStorage.getItem('liic-tema') || 'light';
+            document.documentElement.setAttribute('data-theme', tema);
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIIC Aprende | Universidad del Magdalena</title>
+    <meta name="description" content="Ecosistema digital para el fortalecimiento del aprendizaje práctico del Laboratorio Integrado de Ingeniería Civil de la Universidad del Magdalena.">
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Open Graph / redes sociales -->
+    <meta property="og:title" content="LIIC Aprende | Universidad del Magdalena">
+    <meta property="og:description" content="Aprende antes de llegar al laboratorio. Guías, videos, normas técnicas y autoevaluaciones del Laboratorio Integrado de Ingeniería Civil.">
+    <meta property="og:image" content="assets/logo-unimagdalena.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!--==========================
+    LOADER
+    ===========================-->
+    <div id="loader">
+        <div class="spinner"></div>
+        <h2>LIIC Aprende</h2>
+    </div>
+
+    <!--==========================
+    MODAL
+    ===========================-->
+    <div class="modal" id="modal">
+        <div class="modalContenido">
+            <span class="cerrar" id="cerrarModal">&times;</span>
+            <h2 id="modalTitulo">Próximamente</h2>
+            <p id="modalTexto">Este módulo aún se encuentra en desarrollo.</p>
+            <button id="btnCerrar">Entendido</button>
+        </div>
+    </div>
+
+    <button id="btnTop" aria-label="Volver arriba">↑</button>
+
+    <!--=========================
+    NAVBAR
+    ==========================-->
+    <header class="navbar">
+        <div class="logo">
+            <img src="assets/logo-unimagdalena.png" alt="Logo Universidad">
+            <div>
+                <h2>LIIC Aprende</h2>
+                <span>Universidad del Magdalena</span>
+            </div>
+        </div>
+
+        <nav id="navMenu">
+            <a href="#inicio">Inicio</a>
+            <a href="#liic">LIIC</a>
+            <a href="#areas">Áreas</a>
+            <a href="#materias">Asignaturas</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="navAcciones">
+            <button class="btnTema" id="btnTema" aria-label="Cambiar a modo oscuro">🌙</button>
+            <button class="btnMenu" id="btnMenu" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!--=========================================
+    HERO
+    ==========================================-->
+    <section class="hero" id="inicio">
+        <div class="overlay"></div>
+        <div class="particles"></div>
+
+        <div class="hero-content">
+            <span class="subtitulo">UNIVERSIDAD DEL MAGDALENA</span>
+            <h1>LIIC Aprende</h1>
+            <h2>Ecosistema Digital para el Fortalecimiento del Aprendizaje Práctico</h2>
+            <p>
+                Aprende antes de llegar al laboratorio.
+                Consulta procedimientos, videos, recomendaciones y recursos
+                para fortalecer tu formación práctica.
+            </p>
+
+            <div class="heroBotones">
+                <button class="btnPrincipal" id="btnExplorar">Explorar Plataforma</button>
+                <button class="btnSecundario" id="btnConoceLiic">Conoce el LIIC</button>
+            </div>
+        </div>
+
+        <div class="scroll">↓</div>
+    </section>
+
+    <!--=========================================
+    MISIÓN Y VISIÓN
+    ==========================================-->
+    <section class="misionVision" id="liic">
+        <div class="box">
+            <div class="icono">🎯</div>
+            <h2>Misión</h2>
+            <p>
+                Contribuir al desarrollo del Programa de Ingeniería Civil y de la región proporcionando los recursos
+                necesarios para la ejecución de prácticas y ensayos de laboratorio que fortalezcan las actividades
+                académicas, investigativas y de extensión.
+            </p>
+        </div>
+
+        <div class="box">
+            <div class="icono">🚀</div>
+            <h2>Visión</h2>
+            <p>
+                Ser un laboratorio líder en la ejecución de prácticas y ensayos relacionados con la Ingeniería Civil,
+                reconocido por la calidad de sus procesos, la modernización de sus equipos y el apoyo permanente a la
+                formación profesional.
+            </p>
+        </div>
+    </section>
+
+    <!--=========================================
+    ÁREAS DEL LABORATORIO
+    ==========================================-->
+    <section class="areas" id="areas">
+        <div class="titulo">
+            <h2>Áreas del Laboratorio</h2>
+            <p>El LIIC cuenta con diferentes zonas especializadas para el desarrollo de prácticas académicas.</p>
+        </div>
+
+        <div class="gridAreas">
+            <div class="areaCard">
+                <img src="assets/areas/geotecnia.jpg" alt="Área de Geotecnia">
+                <h3>Geotecnia</h3>
+                <p>Caracterización y comportamiento de suelos.</p>
+            </div>
+            <div class="areaCard">
+                <img src="assets/areas/concreto.jpg" alt="Área de Cemento y Concreto">
+                <h3>Cemento y Concreto</h3>
+                <p>Diseño de mezclas y control de calidad.</p>
+            </div>
+            <div class="areaCard">
+                <img src="assets/areas/pavimentos.jpg" alt="Área de Pavimentos">
+                <h3>Pavimentos</h3>
+                <p>Materiales asfálticos y diseño vial.</p>
+            </div>
+            <div class="areaCard">
+                <img src="assets/areas/fluidos.jpg" alt="Área de Mecánica de Fluidos">
+                <h3>Mecánica de Fluidos</h3>
+                <p>Ensayos hidráulicos y flujo en tuberías.</p>
+            </div>
+            <div class="areaCard">
+                <img src="assets/areas/topografia.jpg" alt="Área de Topografía">
+                <h3>Topografía</h3>
+                <p>Equipos GNSS, estación total y nivelación.</p>
+            </div>
+            <div class="areaCard">
+                <img src="assets/areas/resistencia.jpg" alt="Área de Resistencia de Materiales">
+                <h3>Resistencia de Materiales</h3>
+                <p>Ensayos mecánicos y comportamiento estructural.</p>
+            </div>
+        </div>
+    </section>
+
+    <!--=========================================
+    MATERIAS
+    ==========================================-->
+    <section class="materias" id="materias">
+        <div class="titulo">
+            <h2>Asignaturas</h2>
+            <p>Selecciona la asignatura sobre la que deseas consultar recursos de aprendizaje.</p>
+        </div>
+
+        <div class="gridMaterias">
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>🧱 Laboratorio de Materiales de Construcción</h3>
+                <p>Este módulo estará disponible en futuras versiones.</p>
+            </div>
+
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>🌎 Geotecnia</h3>
+                <p>Este módulo estará disponible en futuras versiones.</p>
+            </div>
+
+            <div class="materia activa">
+                <div class="estado disponible">Disponible</div>
+                <h3>🛣 Pavimentos</h3>
+                <p>Prácticas relacionadas con materiales bituminosos, mezclas asfálticas y estructuras de pavimento.</p>
+                <button class="btnEntrar" data-href="modulo.html">Entrar al módulo</button>
+            </div>
+
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>💧 Mecánica de Fluidos e Hidráulica</h3>
+                <p>Este módulo estará disponible en futuras versiones.</p>
+            </div>
+
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>📐 Topografía</h3>
+                <p>Este módulo estará disponible en futuras versiones.</p>
+            </div>
+
+            <div class="materia bloqueada">
+                <div class="estado">Próximamente</div>
+                <h3>🏗 Resistencia de Materiales</h3>
+                <p>Este módulo estará disponible en futuras versiones.</p>
+            </div>
+        </div>
+    </section>
+
+    <!--=========================================
+    RECURSOS
+    ==========================================-->
+    <section class="recursos">
+        <div class="titulo">
+            <h2>¿Qué encontrarás en LIIC Aprende?</h2>
+            <p>Todo el material necesario para prepararte antes de ingresar al laboratorio.</p>
+        </div>
+
+        <div class="gridRecursos">
+            <div class="recurso">
+                <div class="icono">📄</div>
+                <h3>Guías</h3>
+                <p>Consulta procedimientos resumidos y fichas técnicas.</p>
+            </div>
+            <div class="recurso">
+                <div class="icono">🎥</div>
+                <h3>Videos</h3>
+                <p>Observa paso a paso el desarrollo de cada ensayo.</p>
+            </div>
+            <div class="recurso">
+                <div class="icono">⚠️</div>
+                <h3>Errores Frecuentes</h3>
+                <p>Identifica los errores más comunes antes de realizar la práctica.</p>
+            </div>
+            <div class="recurso">
+                <div class="icono">📊</div>
+                <h3>Interpretación</h3>
+                <p>Aprende a analizar correctamente los resultados obtenidos.</p>
+            </div>
+            <div class="recurso">
+                <div class="icono">📚</div>
+                <h3>Normas</h3>
+                <p>Consulta las normas técnicas utilizadas en cada ensayo.</p>
+            </div>
+            <div class="recurso">
+                <div class="icono">📝</div>
+                <h3>Autoevaluación</h3>
+                <p>Comprueba tus conocimientos antes de ingresar al laboratorio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!--=========================================
+    ESTADÍSTICAS
+    ==========================================-->
+    <section class="estadisticasHome">
+        <div class="numero">
+            <h2>11</h2>
+            <span>Áreas del laboratorio</span>
+        </div>
+        <div class="numero">
+            <h2>+50</h2>
+            <span>Ensayos</span>
+        </div>
+        <div class="numero">
+            <h2>100%</h2>
+            <span>Aprendizaje Digital</span>
+        </div>
+        <div class="numero">
+            <h2>1958</h2>
+            <span>Universidad del Magdalena</span>
+        </div>
+    </section>
+
+    <!--=========================================
+    GALERÍA DEL LIIC
+    ==========================================-->
+    <section class="galeria">
+        <div class="titulo">
+            <h2>Galería del LIIC</h2>
+            <p>Conoce algunos espacios del Laboratorio Integrado de Ingeniería Civil.</p>
+        </div>
+
+        <div class="gridGaleria">
+            <img src="assets/galeria/1.jpg" alt="Práctica académica en el LIIC" loading="lazy">
+            <img src="assets/galeria/2.jpg" alt="Estudiantes durante un ensayo en el LIIC" loading="lazy">
+            <img src="assets/galeria/3.jpg" alt="Zona de trabajo del LIIC" loading="lazy">
+            <img src="assets/galeria/4.jpg" alt="Actividad de campo del LIIC" loading="lazy">
+            <img src="assets/galeria/5.jpg" alt="Estudiantes en práctica de laboratorio" loading="lazy">
+            <img src="assets/galeria/6.jpg" alt="Ensayo al aire libre en el LIIC" loading="lazy">
+        </div>
+    </section>
+
+    <!--=========================================
+    CTA
+    ==========================================-->
+    <section class="cta">
+        <div class="ctaContenido">
+            <h2>¿Listo para comenzar?</h2>
+            <p>Accede al módulo de Pavimentos y fortalece tu aprendizaje antes de realizar la práctica.</p>
+            <button class="btnEntrar" data-href="modulo.html">Ingresar al módulo</button>
+        </div>
+    </section>
+
+    <!--=========================================
+    FOOTER
+    ==========================================-->
+    <footer id="contacto">
+        <div class="footerGrid">
+            <div>
+                <h3>LIIC Aprende</h3>
+                <p>Ecosistema Digital para el Fortalecimiento del Aprendizaje Práctico del Laboratorio Integrado de Ingeniería Civil.</p>
+            </div>
+            <div>
+                <h3>Ubicación</h3>
+                <p>Hangar C<br>Universidad del Magdalena<br>Santa Marta - Colombia</p>
+            </div>
+            <div>
+                <h3>Desarrollado por</h3>
+                <p>Jose Villamizar Monterroza</p>
+                <p>Práctica profesional 2026 II</p>
+                <a href="https://wa.me/573014654649" target="_blank" rel="noopener" class="whatsapp">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.004 3C9.377 3 4 8.373 4 15c0 2.36.687 4.56 1.872 6.41L4 29l7.77-1.84A11.94 11.94 0 0 0 16.004 27C22.63 27 28 21.63 28 15S22.63 3 16.004 3Zm0 21.8a9.76 9.76 0 0 1-4.98-1.36l-.357-.21-4.61 1.09 1.11-4.49-.234-.37A9.77 9.77 0 0 1 5.2 15c0-5.96 4.85-10.8 10.804-10.8S26.8 9.04 26.8 15 21.958 24.8 16.004 24.8Zm5.36-7.34c-.294-.147-1.74-.86-2.01-.958-.27-.099-.467-.147-.663.147-.196.294-.76.958-.932 1.155-.171.196-.343.221-.637.074-.294-.147-1.24-.457-2.362-1.457-.873-.778-1.463-1.74-1.634-2.034-.171-.294-.018-.453.129-.6.132-.132.294-.343.441-.515.147-.171.196-.294.294-.49.098-.196.049-.368-.025-.515-.074-.147-.663-1.598-.909-2.19-.239-.573-.482-.495-.663-.504l-.564-.01c-.196 0-.515.074-.784.368-.27.294-1.03 1.007-1.03 2.457 0 1.45 1.055 2.85 1.202 3.047.147.196 2.076 3.17 5.03 4.444.703.304 1.252.485 1.68.62.706.225 1.348.193 1.856.117.566-.085 1.74-.712 1.985-1.4.245-.688.245-1.278.172-1.4-.074-.123-.27-.196-.564-.343Z"/>
+                    </svg>
+                    301 465 4649
+                </a>
+            </div>
+            <div>
+                <h3>Programa</h3>
+                <p>Ingeniería Civil</p>
+                <p>Universidad del Magdalena</p>
+            </div>
+        </div>
+
+        <div class="copy">© 2026 LIIC Aprende | Universidad del Magdalena</div>
+    </footer>
+
+    <script src="js/app.js?v=4"></script>
+</body>
+
+</html>
