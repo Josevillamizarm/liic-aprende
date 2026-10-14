@@ -512,3 +512,197 @@ document.querySelectorAll(".autoevalBox[data-quiz]").forEach(caja => {
         resultado.innerHTML = "";
     });
 });
+
+//==============================
+// VIDEO POR ENSAYO: FRAGMENTO, CAPÍTULOS Y PANTALLA FINAL (v6)
+// Usa la API oficial de Vimeo (player.js). Si no carga,
+// los capítulos siguen funcionando recargando el video.
+//==============================
+
+function formatoTiempo(seg) {
+    seg = Math.max(0, Math.floor(seg));
+    const m = Math.floor(seg / 60);
+    const s = String(seg % 60).padStart(2, "0");
+    return `${m}:${s}`;
+}
+
+document.querySelectorAll(".videoVimeo").forEach(iframe => {
+    const panel = iframe.closest(".tabPanel");
+    const card = iframe.closest(".ensayoCard");
+    const caja = panel.querySelector(".capitulos");
+    const fin = panel.querySelector(".videoFin");
+    const progreso = panel.querySelector(".videoProgreso");
+    const id = iframe.dataset.video;
+    const h = iframe.dataset.h;
+
+    const INICIO = Number(iframe.dataset.inicio);
+    const FIN = Number(iframe.dataset.fin);
+
+    // Segmento activo: { inicio, fin, siguiente, siguienteTxt } o null (práctica completa)
+    let segmento = { inicio: INICIO, fin: FIN, siguiente: null, siguienteTxt: "" };
+    let anterior = 0;
+    let duracionTotal = 2229;
+
+    const usaApi = typeof Vimeo !== "undefined" && Vimeo.Player;
+    const player = usaApi ? new Vimeo.Player(iframe) : null;
+
+    function marcarBoton(boton) {
+        if (!caja) return;
+        caja.querySelectorAll(".capBtn").forEach(b => b.classList.remove("activo"));
+        if (boton) boton.classList.add("activo");
+    }
+
+    function ocultarFin() {
+        if (fin) fin.hidden = true;
+    }
+
+    function mostrarFin() {
+        if (!fin) return;
+        const titulo = fin.querySelector(".videoFinTitulo");
+        const sig = fin.querySelector(".vfSiguiente");
+        if (segmento && segmento.siguiente) {
+            titulo.textContent = "✔ Terminaste esta parte del ensayo";
+            sig.textContent = "▶ Continuar: " + segmento.siguienteTxt;
+            sig.hidden = false;
+        } else {
+            titulo.textContent = "✔ Terminaste el video de este ensayo";
+            sig.hidden = true;
+        }
+        fin.hidden = false;
+    }
+
+    function pintarProgreso(t) {
+        if (!progreso) return;
+        const modo = progreso.querySelector(".vpModo");
+        const tiempo = progreso.querySelector(".vpTiempo");
+        const relleno = progreso.querySelector(".vpRelleno");
+        const volver = progreso.querySelector(".vpVolver");
+
+        if (segmento) {
+            const largo = segmento.fin - segmento.inicio;
+            const dentro = Math.min(Math.max(t - segmento.inicio, 0), largo);
+            modo.textContent = segmento.siguiente ? "Preparación de la muestra" : "Fragmento de este ensayo";
+            tiempo.textContent = `${formatoTiempo(dentro)} / ${formatoTiempo(largo)}`;
+            relleno.style.width = (dentro / largo * 100) + "%";
+            volver.hidden = true;
+        } else {
+            modo.textContent = "Práctica completa";
+            tiempo.textContent = `${formatoTiempo(t)} / ${formatoTiempo(duracionTotal)}`;
+            relleno.style.width = (t / duracionTotal * 100) + "%";
+            volver.hidden = false;
+        }
+    }
+
+    function irA(t, nuevoSegmento) {
+        segmento = nuevoSegmento;
+        anterior = t;
+        ocultarFin();
+        pintarProgreso(t);
+
+        if (player) {
+            player.setCurrentTime(t)
+                .then(() => player.play())
+                .catch(() => {});
+        } else {
+            iframe.src = `https://player.vimeo.com/video/${id}?h=${h}&title=0&byline=0&portrait=0&autoplay=1#t=${t}s`;
+        }
+        iframe.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    // Botones de capítulos
+    if (caja) {
+        caja.querySelectorAll(".capBtn").forEach(boton => {
+            boton.addEventListener("click", () => {
+                const t = Number(boton.dataset.t);
+                const nuevo = boton.dataset.fin
+                    ? {
+                        inicio: t,
+                        fin: Number(boton.dataset.fin),
+                        siguiente: boton.dataset.siguiente ? Number(boton.dataset.siguiente) : null,
+                        siguienteTxt: boton.dataset.siguienteTxt || ""
+                    }
+                    : null; // capítulos de otros ensayos = práctica completa
+                // Si el capítulo propio está dentro del fragmento principal, se respeta el inicio del fragmento para la barra
+                if (nuevo && !nuevo.siguiente && nuevo.fin === FIN) nuevo.inicio = Math.min(INICIO, t);
+                marcarBoton(boton);
+                irA(t, nuevo);
+            });
+        });
+    }
+
+    // Botones de la pantalla final
+    if (fin) {
+        fin.querySelector(".vfRepetir").addEventListener("click", () => {
+            irA(segmento ? segmento.inicio : INICIO, segmento || { inicio: INICIO, fin: FIN, siguiente: null, siguienteTxt: "" });
+        });
+
+        fin.querySelector(".vfSiguiente").addEventListener("click", () => {
+            const t = segmento.siguiente;
+            const boton = caja ? caja.querySelector(`.capPropio[data-t="${t}"]`) : null;
+            marcarBoton(boton);
+            irA(t, { inicio: t, fin: FIN, siguiente: null, siguienteTxt: "" });
+        });
+
+        fin.querySelector(".vfQuiz").addEventListener("click", () => {
+            if (player) player.pause().catch(() => {});
+            const tab = card ? card.querySelector('.tabBtn[data-tab="autoeval"]') : null;
+            if (tab) {
+                tab.click();
+                tab.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        });
+
+        fin.querySelector(".vfCompleta").addEventListener("click", () => {
+            segmento = null;
+            ocultarFin();
+            marcarBoton(null);
+            if (player) player.play().catch(() => {});
+        });
+    }
+
+    // Volver al fragmento desde el modo práctica completa
+    if (progreso) {
+        progreso.querySelector(".vpVolver").addEventListener("click", () => {
+            const boton = caja ? caja.querySelector(`.capPropio[data-t="${INICIO}"]`) : null;
+            marcarBoton(boton);
+            irA(INICIO, { inicio: INICIO, fin: FIN, siguiente: null, siguienteTxt: "" });
+        });
+    }
+
+    pintarProgreso(INICIO);
+
+    // Sin API: no se puede detener el video; se oculta la barra de avance
+    if (!player) {
+        if (progreso) progreso.hidden = true;
+        return;
+    }
+
+    player.getDuration().then(d => { duracionTotal = d; }).catch(() => {});
+
+    player.on("timeupdate", datos => {
+        const t = datos.seconds;
+        pintarProgreso(t);
+
+        // Detener solo cuando el video CRUZA el final del fragmento reproduciendo
+        // (si el estudiante adelanta a mano más allá, no se interrumpe)
+        if (segmento && anterior < segmento.fin && t >= segmento.fin && t - anterior < 3) {
+            player.pause().catch(() => {});
+            mostrarFin();
+        } else if (segmento && t > segmento.fin + 2 && fin && fin.hidden) {
+            // El estudiante siguió reproduciendo o adelantó: pasa a práctica completa
+            segmento = null;
+            marcarBoton(null);
+            pintarProgreso(t);
+        }
+        anterior = t;
+    });
+
+    player.on("play", () => {
+        ocultarFin();
+    });
+
+    player.on("seeked", datos => {
+        anterior = datos.seconds;
+        pintarProgreso(datos.seconds);
+    });
+});

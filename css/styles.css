@@ -1993,3 +1993,275 @@ html[data-theme="dark"] .videoCredito {
         display: none !important;
     }
 }
+
+/*==================================
+CAPÍTULOS DEL VIDEO (v5)
+===================================*/
+
+.capitulos {
+    margin-top: 20px;
+}
+
+.capitulos h4 {
+    margin-bottom: 10px;
+}
+
+.capLista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.capBtn {
+    background: var(--gris2);
+    color: var(--azul);
+    padding: 9px 16px;
+    font-size: 13px;
+    border-radius: 30px;
+    text-align: left;
+}
+
+.capBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, .10);
+}
+
+.capBtn.capPropio {
+    background: var(--naranja);
+    color: white;
+}
+
+.capBtn.activo {
+    outline: 3px solid var(--azulClaro);
+    outline-offset: 2px;
+}
+
+.capTiempo {
+    font-weight: 700;
+    margin-right: 4px;
+}
+
+.capTodos {
+    margin-top: 15px;
+}
+
+.ensayoCard .capTodos summary {
+    display: inline-block;
+    padding: 0;
+    cursor: pointer;
+    color: var(--azulClaro);
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 12px;
+    background: none;
+}
+
+.ensayoCard .capTodos summary::after {
+    content: " ▾";
+}
+
+.ensayoCard .capTodos[open] summary::after {
+    content: " ▴";
+}
+
+.ensayoCard .capTodos summary:hover {
+    background: none;
+    text-decoration: underline;
+}
+
+html[data-theme="dark"] .capBtn {
+    background: var(--gris2);
+    color: #d7dee6;
+}
+
+html[data-theme="dark"] .capBtn.capPropio {
+    background: var(--naranja);
+    color: white;
+}
+
+html[data-theme="dark"] .ensayoCard .capTodos summary,
+html[data-theme="dark"] .ensayoCard .capTodos summary:hover {
+    background: none;
+    color: #6fb1ff;
+}
+
+@media (max-width: 480px) {
+    .capBtn {
+        width: 100%;
+    }
+}
+
+@media print {
+    .capitulos {
+        display: none !important;
+    }
+}
+
+/*==================================
+VIDEO POR ENSAYO: PANTALLA FINAL Y AVANCE (v6)
+===================================*/
+
+.videoFin {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 20px;
+    text-align: center;
+    background: rgba(11, 31, 58, .88);
+    backdrop-filter: blur(4px);
+    animation: vfAparecer .35s ease;
+}
+
+.videoFin[hidden] {
+    display: none;
+}
+
+@keyframes vfAparecer {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.videoFinTitulo {
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.videoFinBotones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.videoFinBotones button {
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    background: white;
+    color: var(--azul);
+}
+
+.videoFinBotones .vfQuiz,
+.videoFinBotones .vfSiguiente {
+    background: var(--naranja);
+    color: white;
+}
+
+.videoFinBotones .vfCompleta {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, .6);
+}
+
+.videoFinBotones button:hover {
+    transform: translateY(-2px);
+}
+
+.videoProgreso {
+    margin-top: 12px;
+}
+
+.videoProgreso[hidden] {
+    display: none;
+}
+
+.vpTexto {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.vpModo {
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.vpTiempo {
+    font-variant-numeric: tabular-nums;
+}
+
+.vpBarra {
+    height: 6px;
+    border-radius: 6px;
+    background: var(--gris2);
+    overflow: hidden;
+}
+
+.vpRelleno {
+    height: 100%;
+    width: 0;
+    background: var(--naranja);
+    transition: width .3s linear;
+}
+
+.vpVolver {
+    margin-top: 10px;
+    background: none;
+    color: var(--azulClaro);
+    padding: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.vpVolver:hover {
+    text-decoration: underline;
+    transform: none;
+    box-shadow: none;
+}
+
+.videoFinBotones button,
+.vpVolver {
+    width: auto;
+}
+
+.vpVolver[hidden] {
+    display: none;
+}
+
+html[data-theme="dark"] .vpTexto {
+    color: #93a1b0;
+}
+
+html[data-theme="dark"] .vpModo {
+    color: #d7dee6;
+}
+
+html[data-theme="dark"] .vpVolver {
+    color: #6fb1ff;
+}
+
+@media (max-width: 600px) {
+    .videoFin {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .videoFinTitulo {
+        font-size: 16px;
+    }
+
+    .videoFinBotones {
+        gap: 6px;
+    }
+
+    .videoFinBotones button {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+}
+
+@media print {
+    .videoProgreso,
+    .videoFin {
+        display: none !important;
+    }
+}
