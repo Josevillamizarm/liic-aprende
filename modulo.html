@@ -23,7 +23,7 @@
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
-    <link rel="stylesheet" href="css/styles.css?v=4">
+    <link rel="stylesheet" href="css/styles.css?v=6">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -283,12 +283,48 @@
                 <!-- VIDEO -->
                 <div class="tabPanel" data-panel="video">
                     <div class="videoWrap">
-                        <iframe src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0"
+                        <iframe class="videoVimeo" data-video="528723929" data-h="72ef0f18c7" data-inicio="209" data-fin="991"
+                            src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0#t=209s"
                             title="Práctica 2: Diseño de mezclas de concreto asfáltico en caliente"
-                            allow="fullscreen; picture-in-picture; clipboard-write"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                             loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="videoFin" hidden>
+                            <p class="videoFinTitulo">✔ Terminaste el video de este ensayo</p>
+                            <div class="videoFinBotones">
+                                <button type="button" class="vfSiguiente" hidden>▶ Continuar</button>
+                                <button type="button" class="vfRepetir">↺ Repetir</button>
+                                <button type="button" class="vfQuiz">📝 Ir a la autoevaluación</button>
+                                <button type="button" class="vfCompleta">Seguir viendo la práctica completa</button>
+                            </div>
+                        </div>
                     </div>
-                    <p class="videoCredito">Video de la Práctica 2 completa (37 min). En él se muestra la elaboración de las probetas Marshall. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
+                    <div class="videoProgreso">
+                        <div class="vpTexto"><span class="vpModo">Fragmento de este ensayo</span><span class="vpTiempo">0:00 / 0:00</span></div>
+                        <div class="vpBarra"><div class="vpRelleno"></div></div>
+                        <button type="button" class="vpVolver" hidden>↩ Volver al fragmento del ensayo</button>
+                    </div>
+                    <div class="capitulos">
+                        <h4>▶ Ir directo a este ensayo</h4>
+                        <div class="capLista">
+                            <button type="button" class="capBtn capPropio" data-t="209" data-fin="991"><span class="capTiempo">3:29</span> Elaboración de las bachadas</button>
+                            <button type="button" class="capBtn capPropio" data-t="670" data-fin="991"><span class="capTiempo">11:10</span> Compactación de las probetas</button>
+                        </div>
+                        <details class="capTodos">
+                            <summary>Ver todos los capítulos de la práctica</summary>
+                            <div class="capLista">
+                                <button type="button" class="capBtn" data-t="27"><span class="capTiempo">0:27</span> Presentación de la práctica y metodología</button>
+                                <button type="button" class="capBtn" data-t="162"><span class="capTiempo">2:42</span> Inicio de la práctica</button>
+                                <button type="button" class="capBtn" data-t="209"><span class="capTiempo">3:29</span> Elaboración de las bachadas de 1200 g y 1500 g</button>
+                                <button type="button" class="capBtn" data-t="670"><span class="capTiempo">11:10</span> Compactación de las probetas (bachadas de 1200 g)</button>
+                                <button type="button" class="capBtn" data-t="991"><span class="capTiempo">16:31</span> Preparación de la bachada de 1500 g</button>
+                                <button type="button" class="capBtn" data-t="1060"><span class="capTiempo">17:40</span> Gravedad específica bulk</button>
+                                <button type="button" class="capBtn" data-t="1469"><span class="capTiempo">24:29</span> Preparación de muestras para estabilidad y flujo</button>
+                                <button type="button" class="capBtn" data-t="1514"><span class="capTiempo">25:14</span> Gravedad específica máxima</button>
+                                <button type="button" class="capBtn" data-t="1969"><span class="capTiempo">32:49</span> Estabilidad y flujo Marshall</button>
+                            </div>
+                        </details>
+                    </div>
+                    <p class="videoCredito">El video reproduce solo la parte de este ensayo (3:29 a 16:31) y se detiene al terminar. Puedes seguir con la práctica completa (37 min) o saltar a cualquier capítulo. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
                 </div>
 
                 <!-- ERRORES FRECUENTES -->
@@ -512,12 +548,48 @@
                 <!-- VIDEO -->
                 <div class="tabPanel" data-panel="video">
                     <div class="videoWrap">
-                        <iframe src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0"
+                        <iframe class="videoVimeo" data-video="528723929" data-h="72ef0f18c7" data-inicio="1514" data-fin="1969"
+                            src="https://player.vimeo.com/video/528723929?h=72ef0f18c7&amp;title=0&amp;byline=0&amp;portrait=0#t=1514s"
                             title="Práctica 2: Diseño de mezclas de concreto asfáltico en caliente"
-                            allow="fullscreen; picture-in-picture; clipboard-write"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
                             loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <div class="videoFin" hidden>
+                            <p class="videoFinTitulo">✔ Terminaste el video de este ensayo</p>
+                            <div class="videoFinBotones">
+                                <button type="button" class="vfSiguiente" hidden>▶ Continuar</button>
+                                <button type="button" class="vfRepetir">↺ Repetir</button>
+                                <button type="button" class="vfQuiz">📝 Ir a la autoevaluación</button>
+                                <button type="button" class="vfCompleta">Seguir viendo la práctica completa</button>
+                            </div>
+                        </div>
                     </div>
-                    <p class="videoCredito">Video de la Práctica 2 completa (37 min). En él se muestra la determinación de la gravedad específica máxima. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
+                    <div class="videoProgreso">
+                        <div class="vpTexto"><span class="vpModo">Fragmento de este ensayo</span><span class="vpTiempo">0:00 / 0:00</span></div>
+                        <div class="vpBarra"><div class="vpRelleno"></div></div>
+                        <button type="button" class="vpVolver" hidden>↩ Volver al fragmento del ensayo</button>
+                    </div>
+                    <div class="capitulos">
+                        <h4>▶ Ir directo a este ensayo</h4>
+                        <div class="capLista">
+                            <button type="button" class="capBtn capPropio" data-t="991" data-fin="1060" data-siguiente="1514" data-siguiente-txt="Procedimiento del ensayo (25:14)"><span class="capTiempo">16:31</span> Preparación de la muestra (bachada de 1500 g)</button>
+                            <button type="button" class="capBtn capPropio" data-t="1514" data-fin="1969"><span class="capTiempo">25:14</span> Procedimiento del ensayo</button>
+                        </div>
+                        <details class="capTodos">
+                            <summary>Ver todos los capítulos de la práctica</summary>
+                            <div class="capLista">
+                                <button type="button" class="capBtn" data-t="27"><span class="capTiempo">0:27</span> Presentación de la práctica y metodología</button>
+                                <button type="button" class="capBtn" data-t="162"><span class="capTiempo">2:42</span> Inicio de la práctica</button>
+                                <button type="button" class="capBtn" data-t="209"><span class="capTiempo">3:29</span> Elaboración de las bachadas de 1200 g y 1500 g</button>
+                                <button type="button" class="capBtn" data-t="670"><span class="capTiempo">11:10</span> Compactación de las probetas (bachadas de 1200 g)</button>
+                                <button type="button" class="capBtn" data-t="991"><span class="capTiempo">16:31</span> Preparación de la bachada de 1500 g</button>
+                                <button type="button" class="capBtn" data-t="1060"><span class="capTiempo">17:40</span> Gravedad específica bulk</button>
+                                <button type="button" class="capBtn" data-t="1469"><span class="capTiempo">24:29</span> Preparación de muestras para estabilidad y flujo</button>
+                                <button type="button" class="capBtn" data-t="1514"><span class="capTiempo">25:14</span> Gravedad específica máxima</button>
+                                <button type="button" class="capBtn" data-t="1969"><span class="capTiempo">32:49</span> Estabilidad y flujo Marshall</button>
+                            </div>
+                        </details>
+                    </div>
+                    <p class="videoCredito">El video reproduce solo el procedimiento de este ensayo (25:14 a 32:49) y se detiene al terminar. Puedes seguir con la práctica completa (37 min) o saltar a cualquier capítulo. Fuente: Centro Innova – Universidad del Magdalena, plataforma Bloque 10 (2021).</p>
                 </div>
 
                 <!-- ERRORES FRECUENTES -->
@@ -651,7 +723,8 @@
         <div class="copy">© 2026 LIIC Aprende | Universidad del Magdalena</div>
     </footer>
 
-    <script src="js/app.js?v=4"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="js/app.js?v=6"></script>
 </body>
 
 </html>
