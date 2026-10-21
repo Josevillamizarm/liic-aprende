@@ -2265,3 +2265,45 @@ html[data-theme="dark"] .vpVolver {
         display: none !important;
     }
 }
+
+/*==================================
+CRÉDITO DEL VIDEO (v7) – condición de uso de Centro Innova
+===================================*/
+
+.videoFuente {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-left: 4px solid var(--azulClaro);
+    background: var(--gris2);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--azul);
+}
+
+.videoFuente a {
+    color: var(--azulClaro);
+    font-weight: 600;
+    margin-left: 4px;
+    white-space: nowrap;
+}
+
+.videoFuente a:hover {
+    text-decoration: underline;
+}
+
+html[data-theme="dark"] .videoFuente {
+    color: #d7dee6;
+}
+
+html[data-theme="dark"] .videoFuente a {
+    color: #6fb1ff;
+}
+
+@media (max-width: 480px) {
+    .videoFuente a {
+        white-space: normal;
+        display: inline-block;
+        margin-left: 0;
+    }
+}
