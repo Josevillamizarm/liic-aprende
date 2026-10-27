@@ -1,0 +1,145 @@
+<!--
+=====================================================================
+ PLANTILLA DE ENSAYO – LIIC Aprende
+=====================================================================
+ Uso:
+ 1. Copie TODO el bloque <details class="ensayoCard"> ... </details>.
+ 2. Péguelo en el archivo del módulo (por ejemplo, modulo.html),
+    dentro de <section class="ensayos">, antes de los ensayos bloqueados.
+ 3. Reemplace todo lo que está entre [CORCHETES].
+ 4. data-id debe ser ÚNICO en toda la plataforma: minúsculas, sin tildes
+    ni espacios (ej.: "penetracion-asfaltos"). El mismo valor se usa en
+    data-quiz y en el objeto PREGUNTAS de js/app.js.
+ 5. Si el ensayo no tiene video autorizado, borre el bloque VIDEO
+    completo (botón de la pestaña y panel).
+ Ver el Manual de administración de LIIC Aprende para más detalle.
+=====================================================================
+-->
+<details class="ensayoCard" data-id="[id-del-ensayo]">
+    <summary>
+        [Nombre del ensayo]
+        <span class="norma">[INV E-XXX-13]</span>
+        <span class="flecha">⌄</span>
+    </summary>
+    <div class="ensayoCuerpo">
+
+        <div class="cardHerramientas">
+            <label class="checkCompletadoWrap">
+                <input type="checkbox" class="checkCompletado">
+                Marcar como completado
+            </label>
+            <button type="button" class="btnImprimir">🖨️ Imprimir / PDF</button>
+        </div>
+
+        <!-- Aviso: mantener mientras el docente no haya validado el contenido -->
+        <div class="avisoValidacion">
+            <span class="avisoIcono">ⓘ</span>
+            <p><strong>Contenido en proceso de validación</strong> por el docente de la asignatura [Asignatura] (versión 1.0, [mes] de [año]). Si encuentras un error o tienes una sugerencia, escríbenos a <a href="mailto:liic@unimagdalena.edu.co?subject=LIIC%20Aprende%20-%20Observaci%C3%B3n">liic@unimagdalena.edu.co</a>.</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tabBtn activo" data-tab="ficha">🧾 Ficha técnica</button>
+            <button class="tabBtn" data-tab="guia">📄 Guía paso a paso</button>
+            <button class="tabBtn" data-tab="video">🎥 Video</button>
+            <button class="tabBtn" data-tab="errores">⚠️ Errores frecuentes</button>
+            <button class="tabBtn" data-tab="interpretacion">📊 Interpretación</button>
+            <button class="tabBtn" data-tab="normas">📚 Normas</button>
+            <button class="tabBtn" data-tab="autoeval">📝 Autoevaluación</button>
+        </div>
+
+        <!-- FICHA TÉCNICA -->
+        <div class="tabPanel activo" data-panel="ficha">
+            <h4>Objetivo</h4>
+            <p>[Objetivo del ensayo en una o dos frases.]</p>
+            <div class="fichaGrid">
+                <div class="fichaItem"><span class="fichaEtiqueta">Norma</span><strong>[INV E-XXX-13]</strong></div>
+                <div class="fichaItem"><span class="fichaEtiqueta">[Dato clave]</span><strong>[Valor]</strong></div>
+                <!-- Agregue o quite fichaItem según necesite -->
+            </div>
+            <h4>Equipos</h4>
+            <ul>
+                <li>[Equipo 1]</li>
+                <li>[Equipo 2]</li>
+            </ul>
+            <h4>Materiales</h4>
+            <ul>
+                <li>[Material 1]</li>
+            </ul>
+            <div class="nota notaAlerta"><strong>Seguridad:</strong> [Recomendación de seguridad.]</div>
+        </div>
+
+        <!-- GUÍA PASO A PASO (la numeración es automática) -->
+        <div class="tabPanel" data-panel="guia">
+            <h4>1. [Etapa]</h4>
+            <ol class="pasos">
+                <li>[Paso]</li>
+                <li>[Paso]</li>
+            </ol>
+            <h4>2. [Etapa]</h4>
+            <ol class="pasos">
+                <li>[Paso]</li>
+            </ol>
+            <div class="nota"><strong>Consejo:</strong> [Consejo práctico.]</div>
+        </div>
+
+        <!-- VIDEO (solo con autorización del titular). Borre este panel y su botón si no hay video. -->
+        <div class="tabPanel" data-panel="video">
+            <div class="videoWrap">
+                <iframe class="videoVimeo" data-video="[ID Vimeo]" data-h="[hash]" data-inicio="[segundo inicial]" data-fin="[segundo final]"
+                    src="https://player.vimeo.com/video/[ID Vimeo]?h=[hash]&amp;title=0&amp;byline=0&amp;portrait=0#t=[segundo inicial]s"
+                    title="[Título del video]" allow="autoplay; fullscreen; picture-in-picture" loading="lazy" allowfullscreen></iframe>
+                <div class="videoFin" hidden>
+                    <p class="videoFinTitulo">✔ Terminaste el video de este ensayo</p>
+                    <div class="videoFinBotones">
+                        <button type="button" class="vfSiguiente" hidden>▶ Continuar</button>
+                        <button type="button" class="vfRepetir">↺ Repetir</button>
+                        <button type="button" class="vfQuiz">📝 Ir a la autoevaluación</button>
+                        <button type="button" class="vfCompleta">Seguir viendo el video completo</button>
+                    </div>
+                </div>
+            </div>
+            <p class="videoFuente">Fuente: [Crédito exigido por el titular]. <a href="[enlace al video original]" target="_blank" rel="noopener">Ver el video original ↗</a></p>
+            <div class="videoProgreso">
+                <div class="vpTexto"><span class="vpModo">Fragmento de este ensayo</span><span class="vpTiempo">0:00 / 0:00</span></div>
+                <div class="vpBarra"><div class="vpRelleno"></div></div>
+                <button type="button" class="vpVolver" hidden>↩ Volver al fragmento del ensayo</button>
+            </div>
+            <div class="capitulos">
+                <h4>▶ Ir directo a este ensayo</h4>
+                <div class="capLista">
+                    <!-- data-t = segundo de inicio; data-fin = segundo donde se pausa -->
+                    <button type="button" class="capBtn capPropio" data-t="[s]" data-fin="[s]"><span class="capTiempo">[m:ss]</span> [Capítulo]</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ERRORES FRECUENTES -->
+        <div class="tabPanel" data-panel="errores">
+            <h4>Errores más comunes y cómo evitarlos</h4>
+            <div class="errorItem">
+                <strong>[Error.]</strong>
+                <p>[Consecuencia y cómo evitarlo.]</p>
+            </div>
+        </div>
+
+        <!-- INTERPRETACIÓN -->
+        <div class="tabPanel" data-panel="interpretacion">
+            <h4>Cálculos</h4>
+            <div class="formula">[Fórmula]</div>
+            <p>[Explicación de variables y criterios.]</p>
+        </div>
+
+        <!-- NORMAS -->
+        <div class="tabPanel" data-panel="normas">
+            <ul>
+                <li><strong>[INV E-XXX-13]</strong> – [Nombre de la norma].</li>
+            </ul>
+        </div>
+
+        <!-- AUTOEVALUACIÓN: las preguntas se escriben en js/app.js, objeto PREGUNTAS, con la misma clave del data-id -->
+        <div class="tabPanel" data-panel="autoeval">
+            <div class="autoevalBox" data-quiz="[id-del-ensayo]"><p>⚠️ Si ves este mensaje, el archivo <b>js/app.js</b> no está actualizado.</p></div>
+        </div>
+
+    </div>
+</details>
