@@ -7,7 +7,7 @@ Plataforma web de apoyo al aprendizaje práctico del **Laboratorio Integrado de 
 - **Autor de la Fase I:** José David Villamizar Monterroza, práctica profesional 2026-II, Ingeniería Civil.
 - **Contacto del laboratorio:** liic@unimagdalena.edu.co
 
-> El procedimiento completo de administración está en el **Manual de administración de LIIC Aprende** (Anexo 8 del informe de práctica). Este archivo es un resumen para quien vaya a editar el código.
+> El procedimiento completo de administración está en el **Manual de administración de LIIC Aprende** (`docs/`, también Anexo 8 del informe de práctica). Este archivo es un resumen para quien vaya a editar el código.
 
 ---
 
@@ -22,6 +22,8 @@ Plataforma web de apoyo al aprendizaje práctico del **Laboratorio Integrado de 
 | `assets/` | Imágenes: `areas/`, `galeria/`, logo y favicon. |
 | `plantillas/ensayo-plantilla.html` | Bloque HTML listo para crear un ensayo nuevo. |
 | `plantillas/preguntas-plantilla.js` | Bloque para agregar las preguntas de autoevaluación de un ensayo. |
+| `docs/Manual_administracion_LIIC_Aprende.docx` | Manual completo de administración y ampliación de la plataforma. |
+| `docs/Formato_validacion_LIIC_Aprende.docx` | Formato para que el docente valide técnicamente los contenidos de cada ensayo. |
 
 No usa frameworks ni base de datos: es HTML, CSS y JavaScript. El progreso del estudiante se guarda solo en su navegador.
 
