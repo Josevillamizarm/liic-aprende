@@ -2307,3 +2307,47 @@ html[data-theme="dark"] .videoFuente a {
         margin-left: 0;
     }
 }
+
+/*==================================
+AVISO DE VALIDACIÓN DOCENTE (v8)
+===================================*/
+
+.avisoValidacion {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin: 0 0 18px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: #fff6e8;
+    border: 1px solid #f6c98a;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #6b4a12;
+}
+
+.avisoValidacion p {
+    margin: 0;
+}
+
+.avisoIcono {
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--naranja);
+}
+
+.avisoValidacion a {
+    color: var(--azulClaro);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+html[data-theme="dark"] .avisoValidacion {
+    background: rgba(242, 140, 40, .12);
+    border-color: rgba(242, 140, 40, .45);
+    color: #f3d9b5;
+}
+
+html[data-theme="dark"] .avisoValidacion a {
+    color: #6fb1ff;
+}
