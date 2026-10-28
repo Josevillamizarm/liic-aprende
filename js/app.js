@@ -328,30 +328,6 @@ document.querySelectorAll(".checkCompletado").forEach(check => {
 actualizarBarraProgreso();
 
 //==============================
-// IMPRIMIR / EXPORTAR FICHA A PDF
-//==============================
-
-document.querySelectorAll(".btnImprimir").forEach(boton => {
-    boton.addEventListener("click", () => {
-        const card = boton.closest(".ensayoCard");
-        if (!card) return;
-
-        card.setAttribute("open", "");
-        card.classList.add("solo-imprimir");
-        document.body.classList.add("modo-impresion");
-
-        window.print();
-    });
-});
-
-window.addEventListener("afterprint", () => {
-    document.body.classList.remove("modo-impresion");
-    document.querySelectorAll(".solo-imprimir").forEach(card => {
-        card.classList.remove("solo-imprimir");
-    });
-});
-
-//==============================
 // ANIMACIÓN AL ABRIR UNA FICHA
 //==============================
 
