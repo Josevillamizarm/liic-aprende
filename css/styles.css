@@ -2351,3 +2351,170 @@ html[data-theme="dark"] .avisoValidacion {
 html[data-theme="dark"] .avisoValidacion a {
     color: #6fb1ff;
 }
+
+/*==================================
+IMPRESIÓN DE UN ENSAYO (v9)
+Solo se imprime el ensayo elegido, completo y en blanco y negro legible
+===================================*/
+
+@page {
+    size: letter;
+    margin: 1.8cm 1.6cm;
+}
+
+@media print {
+    html, body {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    /* Ocultar todo lo que no sea la sección de ensayos */
+    body.modo-impresion > *:not(.ensayos) {
+        display: none !important;
+    }
+
+    body.modo-impresion .ensayos > *:not(.solo-imprimir) {
+        display: none !important;
+    }
+
+    body.modo-impresion .ensayos {
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: none !important;
+    }
+
+    /* Anular la animación de aparición (opacidad 0) */
+    body.modo-impresion .ensayoCard.solo-imprimir,
+    body.modo-impresion .ensayoCard.solo-imprimir * {
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        transition: none !important;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir {
+        border: none !important;
+        background: #fff !important;
+        padding: 0 !important;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir summary {
+        background: #fff !important;
+        color: #0B2545 !important;
+        font-size: 20pt !important;
+        border-bottom: 3px solid #F28C28;
+        padding: 0 0 8px !important;
+        margin-bottom: 14px;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir > summary {
+        display: block !important;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir > summary .norma {
+        display: inline-block;
+        margin-left: 8px;
+        font-size: 10pt;
+        vertical-align: middle;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir summary .flecha {
+        display: none !important;
+    }
+
+    body.modo-impresion .ensayoCard.solo-imprimir summary::after {
+        content: "LIIC Aprende · Laboratorio Integrado de Ingeniería Civil – Universidad del Magdalena";
+        display: block;
+        font-size: 9pt;
+        font-weight: 400;
+        color: #555;
+        margin-top: 4px;
+    }
+
+    /* Título de cada sección, ya que las pestañas no se imprimen */
+    body.modo-impresion .solo-imprimir .tabPanel::before {
+        display: block;
+        font-size: 14pt;
+        font-weight: 700;
+        color: #0B2545;
+        border-left: 5px solid #F28C28;
+        padding-left: 8px;
+        margin: 10px 0 10px;
+    }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="ficha"]::before { content: "Ficha técnica"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="guia"]::before { content: "Guía paso a paso"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="video"]::before { content: "Video"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="errores"]::before { content: "Errores frecuentes"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="interpretacion"]::before { content: "Interpretación de resultados"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="normas"]::before { content: "Normas técnicas"; }
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="autoeval"]::before { content: "Autoevaluación"; }
+
+    body.modo-impresion .solo-imprimir .tabPanel {
+        page-break-inside: auto !important;
+        break-inside: auto !important;
+    }
+
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="guia"],
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="errores"],
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="autoeval"] {
+        break-before: page;
+        page-break-before: always;
+    }
+
+    /* El video no se puede imprimir: se deja una referencia */
+    body.modo-impresion .solo-imprimir .videoWrap,
+    body.modo-impresion .solo-imprimir .videoProgreso,
+    body.modo-impresion .solo-imprimir .capitulos,
+    body.modo-impresion .solo-imprimir .videoFin,
+    body.modo-impresion .solo-imprimir .videoCredito {
+        display: none !important;
+    }
+
+    body.modo-impresion .solo-imprimir .tabPanel[data-panel="video"]::after {
+        content: "Consulte el video de este ensayo en la plataforma: josevillamizarm.github.io/liic-aprende";
+        display: block;
+        font-size: 10pt;
+        color: #333;
+    }
+
+    /* Autoevaluación: preguntas sin botones */
+    body.modo-impresion .solo-imprimir .quizAcciones,
+    body.modo-impresion .solo-imprimir .quizResultado,
+    body.modo-impresion .solo-imprimir .quizIntro {
+        display: none !important;
+    }
+
+    body.modo-impresion .solo-imprimir .quizPregunta {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    body.modo-impresion .solo-imprimir .errorItem,
+    body.modo-impresion .solo-imprimir .fichaItem,
+    body.modo-impresion .solo-imprimir .nota,
+    body.modo-impresion .solo-imprimir .formula,
+    body.modo-impresion .solo-imprimir table {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    body.modo-impresion .solo-imprimir a {
+        color: #0B2545 !important;
+        text-decoration: none !important;
+    }
+
+    /* Colores de fondo visibles en la impresión */
+    body.modo-impresion .solo-imprimir * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+@media print {
+    html[data-theme="dark"] body.modo-impresion .solo-imprimir,
+    html[data-theme="dark"] body.modo-impresion .solo-imprimir * {
+        color: #111 !important;
+        background-color: transparent !important;
+        border-color: #bbb !important;
+    }
+}

@@ -331,20 +331,34 @@ actualizarBarraProgreso();
 // IMPRIMIR / EXPORTAR FICHA A PDF
 //==============================
 
+let temaAntesDeImprimir = null;
+
 document.querySelectorAll(".btnImprimir").forEach(boton => {
     boton.addEventListener("click", () => {
         const card = boton.closest(".ensayoCard");
         if (!card) return;
 
         card.setAttribute("open", "");
+        card.style.opacity = "1";
+        card.style.transform = "none";
         card.classList.add("solo-imprimir");
         document.body.classList.add("modo-impresion");
 
-        window.print();
+        // La impresión siempre sale en tema claro, aunque el estudiante use modo oscuro
+        temaAntesDeImprimir = document.documentElement.getAttribute("data-theme");
+        document.documentElement.setAttribute("data-theme", "light");
+
+        // Pequeña espera para que el navegador aplique los estilos antes de imprimir
+        setTimeout(() => window.print(), 150);
     });
 });
 
+// Si el estudiante imprime con Ctrl + P (sin el botón), se imprime la página normal
 window.addEventListener("afterprint", () => {
+    if (temaAntesDeImprimir) {
+        document.documentElement.setAttribute("data-theme", temaAntesDeImprimir);
+        temaAntesDeImprimir = null;
+    }
     document.body.classList.remove("modo-impresion");
     document.querySelectorAll(".solo-imprimir").forEach(card => {
         card.classList.remove("solo-imprimir");
